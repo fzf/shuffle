@@ -1,6 +1,10 @@
-%p#notice= notice
+%ul.table-view
+  %li.table-view-cell
+    %span.player
+      = @players.first.name
+    %span.pull-right
+      = @players.last.name
+  %li.table-view-cell
+    %span.pull-left
 
-
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+    %span.pull-right

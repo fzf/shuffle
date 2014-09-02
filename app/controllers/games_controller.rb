@@ -10,11 +10,13 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @players = @game.players
   end
 
   # GET /games/new
   def new
-    @game = Game.new
+    @game = Game.new(points: 11)
+    @players = Player.all
   end
 
   # GET /games/1/edit
@@ -25,6 +27,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    binding.pry
 
     respond_to do |format|
       if @game.save
@@ -61,14 +64,14 @@ class GamesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game
+    @game = Game.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def game_params
-      params[:game]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def game_params
+    params.require(:game).permit(:points, player_ids: [])
+  end
 end

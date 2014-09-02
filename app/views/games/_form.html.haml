@@ -5,6 +5,21 @@
       %ul
         - @game.errors.full_messages.each do |msg|
           %li= msg
+  .table-view
+    .input-row
+      = f.label :points
+      = f.text_field :points
+    .table-view-divider
+      Players
+    - @players.each do |player|
+      .table-view-cell
+        .icon.icon-plus.js-add-player
+          = check_box_tag "game[player_ids][]",
+            player.id,
+            @game.player_ids.include?(player.id),
+            id: dom_id(player),
+            hidden: true
+        = label_tag dom_id(player), player.name
 
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-positive btn-block"

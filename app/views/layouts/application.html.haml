@@ -14,9 +14,6 @@
     #content
       %header.bar.bar-nav
         #menu.icon.icon-bars.pull-left
-        - if current_player
-          = link_to player_path(current_player) do
-            .icon.icon-person.pull-right
         %h1.title
           = @title
       %body.content

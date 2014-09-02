@@ -1,4 +1,4 @@
-%ul.table-view
+%ul.table-view.game-show
   %li.table-view-cell
     %span.player
       = @players.first.name
@@ -6,5 +6,20 @@
       = @players.last.name
   %li.table-view-cell
     %span.pull-left
-
+      Points
+      = @first_player_points
     %span.pull-right
+      Points
+      = @last_player_points
+
+  - (1..5).each do |points|
+    %li.table-view-cell
+      %span.pull-left
+        = render partial: 'turns/form', locals: { points: points, winner_id: @first_player.id, loser_id: @last_player.id }
+      %span.pull-right
+        = render partial: 'turns/form', locals: { points: points, winner_id: @last_player.id, loser_id: @first_player.id }
+  %li.table-view-cell
+    %span.pull-left
+      = render partial: 'turns/form', locals: { points: nil, winner_id: @first_player.id, loser_id: @last_player.id }
+    %span.pull-right
+      = render partial: 'turns/form', locals: { points: nil, winner_id: @last_player.id, loser_id: @first_player.id }

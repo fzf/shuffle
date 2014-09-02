@@ -14,11 +14,7 @@
     - @players.each do |player|
       .table-view-cell
         .icon.icon-plus.js-add-player
-          = check_box_tag "game[player_ids][]",
-            player.id,
-            @game.player_ids.include?(player.id),
-            id: dom_id(player),
-            hidden: true
+          = check_box_tag "game[player_ids][]", player.id, @game.player_ids.include?(player.id), id: dom_id(player), hidden: true
         = label_tag dom_id(player), player.name
 
   .actions

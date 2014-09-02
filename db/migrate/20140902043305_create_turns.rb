@@ -1,9 +1,8 @@
-class CreateGames < ActiveRecord::Migration
+class CreateTurns < ActiveRecord::Migration
   def change
-    create_table :games do |t|
+    create_table :turns do |t|
       t.integer :points
-      t.boolean :completed, default: false
-
+      t.belongs_to :game
       t.belongs_to :winner
       t.belongs_to :loser
 

@@ -1,0 +1,10 @@
+= form_for :turn, url: game_turns_path(@game) do |f|
+  = f.hidden_field :game_id, value: @game.id
+  = f.hidden_field :winner_id, value: winner_id
+  = f.hidden_field :loser_id, value: loser_id
+  - if points
+    = f.hidden_field :points, value: points
+    = f.submit "+#{points}", class: 'btn'
+  - else
+    = f.text_field :points
+    = f.submit 'Ok', class: 'btn'

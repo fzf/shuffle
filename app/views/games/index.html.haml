@@ -2,5 +2,11 @@
   = link_to 'New', [:new, :game], class: "btn btn-positive btn-block"
   - @games.each do |game|
     %li.table-view-cell
-      = game.created_at
-      .pull-right
+      %span.pull-left
+        = link_to game do
+          = game.created_at.localtime
+      %span.pull-right
+        - if game.completed?
+          = game.winner.name
+        - else
+          Not completed

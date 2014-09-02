@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :completed]
+  before_action :set_game, only: [:show, :edit, :update, :destroy]
 
   # GET /games
   # GET /games.json
@@ -10,11 +10,15 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-    @players = @game.players
-    @first_player = @players.first
-    @last_player = @players.last
-    @first_player_points = @first_player.winning_turns.where(game: @game).sum(:points)
-    @last_player_points = @last_player.winning_turns.where(game: @game).sum(:points)
+    if @game.completed?
+      render :completed
+    else
+      @players              = @game.players
+      @first_player         = @players.first
+      @last_player          = @players.last
+      @first_player_points  = @first_player.winning_turns.where(game: @game).sum(:points)
+      @last_player_points   = @last_player.winning_turns.where(game: @game).sum(:points)
+    end
   end
 
   # GET /games/new

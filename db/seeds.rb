@@ -14,3 +14,32 @@
     password_confirmation:  'password'
   )
 end
+
+game = Game.create(
+  east_side: Side.create(
+    players: [
+      Player.all[0],
+      Player.all[2]
+    ]
+  ),
+  west_side: Side.create(
+    players: [
+      Player.all[1],
+      Player.all[3]
+    ]
+  ),
+  teams: [
+    Team.create(
+      players: [
+        Player.all[0],
+        Player.all[1]
+      ]
+    ),
+    Team.create(
+      players: [
+        Player.all[2],
+        Player.all[3]
+      ]
+    )
+  ]
+)

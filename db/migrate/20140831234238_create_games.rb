@@ -7,6 +7,9 @@ class CreateGames < ActiveRecord::Migration
       t.belongs_to :winner
       t.belongs_to :loser
 
+      t.belongs_to :east_side
+      t.belongs_to :west_side
+      
       t.timestamps
     end
   end

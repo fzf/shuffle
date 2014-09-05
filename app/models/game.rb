@@ -1,15 +1,16 @@
 class Game < ActiveRecord::Base
+  has_many :turns
+
+  belongs_to :winner, class_name: 'Team'
+  belongs_to :loser,  class_name: 'Team'
+
   has_many :game_players
   has_many :players, through: :game_players
   accepts_nested_attributes_for :players
-  has_many :turns
 
-  belongs_to :winner, class_name: 'Player'
-  belongs_to :loser, class_name: 'Player'
+  has_many :game_sides
+  has_many :sides, through: :game_sides
 
-  belongs_to :east_side, class_name: 'Side'
-  belongs_to :west_side, class_name: 'Side'
-
-  has_many :team_games
-  has_many :teams, through: :team_games
+  has_many :game_teams
+  has_many :teams, through: :game_teams
 end

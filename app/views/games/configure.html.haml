@@ -1,0 +1,19 @@
+= form_for @game do |f|
+  - if @game.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@game.errors.count, "error")} prohibited this game from being saved:"
+      %ul
+        - @game.errors.full_messages.each do |msg|
+          %li= msg
+  .table-view
+    .table-view-divider
+      Players
+    - @players.each do |player|
+      .table-view-cell
+        = label_tag dom_id(player), player.name
+        .pull-right
+          .icon.icon-plus.js-add-player
+            = check_box_tag "game[team_attributes][]", player.id, @game.player_ids.include?(player.id), id: dom_id(player), hidden: true
+
+  .actions
+    = f.submit 'Save', class: "btn btn-positive btn-block"

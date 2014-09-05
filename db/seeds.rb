@@ -16,18 +16,20 @@
 end
 
 game = Game.create(
-  east_side: Side.create(
-    players: [
-      Player.all[0],
-      Player.all[2]
-    ]
-  ),
-  west_side: Side.create(
-    players: [
-      Player.all[1],
-      Player.all[3]
-    ]
-  ),
+  sides: [
+    Side.create(
+      players: [
+        Player.all[0],
+        Player.all[2]
+      ]
+    ),
+    Side.create(
+      players: [
+        Player.all[1],
+        Player.all[3]
+      ]
+    )
+  ],
   teams: [
     Team.create(
       players: [

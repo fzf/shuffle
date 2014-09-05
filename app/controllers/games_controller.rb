@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :configure, :edit, :update, :destroy]
 
   # GET /games
   # GET /games.json
@@ -12,6 +12,8 @@ class GamesController < ApplicationController
   def show
     if @game.completed?
       render :completed
+    elsif @game.teams.empty?
+      redirect_to [@game, :configure]
     else
       @players              = @game.players
       @first_player         = @players.first
@@ -19,6 +21,11 @@ class GamesController < ApplicationController
       @first_player_points  = @first_player.winning_turns.where(game: @game).sum(:points)
       @last_player_points   = @last_player.winning_turns.where(game: @game).sum(:points)
     end
+  end
+
+  def configure
+    @players = @game.players
+
   end
 
   # GET /games/new

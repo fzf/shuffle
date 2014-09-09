@@ -5,7 +5,6 @@
 $(document).ready ->
   $('.js-add-player').click ->
     $(this).find('input:checkbox').prop("checked", true);
-    $(this).toggleClass('icon-plus')
-    $(this).toggleClass('icon-close');
+    $(this).toggleClass('btn-outlined');
     return
   return

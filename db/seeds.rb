@@ -16,14 +16,17 @@
 end
 
 game = Game.create(
+  points: 11,
   sides: [
     Side.create(
+      direction: 'east',
       players: [
         Player.all[0],
         Player.all[2]
       ]
     ),
     Side.create(
+      direction: 'west',
       players: [
         Player.all[1],
         Player.all[3]
@@ -32,12 +35,14 @@ game = Game.create(
   ],
   teams: [
     Team.create(
+      color: 'red',
       players: [
         Player.all[0],
         Player.all[1]
       ]
     ),
     Team.create(
+      color: 'blue',
       players: [
         Player.all[2],
         Player.all[3]

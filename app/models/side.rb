@@ -5,4 +5,9 @@ class Side < ActiveRecord::Base
 
   has_many :game_sides
   has_many :teams, through: :game_sides
+
+  has_many :turns
+
+  validates :direction, inclusion: { in: [ 'east', 'west' ] }
+
 end

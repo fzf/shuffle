@@ -1,7 +1,9 @@
 class Turn < ActiveRecord::Base
   belongs_to :game
-  belongs_to :winner, class_name: 'Player'
-  belongs_to :loser, class_name: 'Player'
+  belongs_to :side
+
+  belongs_to :winner, class_name: 'Team'
+  belongs_to :loser, class_name: 'Team'
 
   after_create :check_winner
 

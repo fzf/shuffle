@@ -6,6 +6,4 @@ class Player < ActiveRecord::Base
 
   has_many :game_players
   has_many :games, through: :game_players
-  has_many :winning_turns, class_name: Turn, foreign_key: :winner_id
-  has_many :losing_turns, class_name: Turn, foreign_key: :losing_id
 end

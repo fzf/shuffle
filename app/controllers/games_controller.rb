@@ -11,31 +11,51 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     if @game.completed?
+      @title = "Game Completed"
       render :completed
-    elsif @game.teams.empty?
-      redirect_to [@game, :configure]
+    elsif @game.sides.empty?
+      redirect_to [:configure, @game]
     else
-      @players              = @game.players
-      @first_player         = @players.first
-      @last_player          = @players.last
-      @first_player_points  = @first_player.winning_turns.where(game: @game).sum(:points)
-      @last_player_points   = @last_player.winning_turns.where(game: @game).sum(:points)
+      if @game.turns.empty?
+        @side = @game.sides.sample
+      else
+        @side = (@game.sides - [@game.turns.last.side]).first
+      end
+
+      @title              = "#{@side.direction.humanize} Side"
+
+      @blue_team         = @game.teams.where(color: 'blue').first
+      @red_team          = @game.teams.where(color: 'red').first
+
+      @blue_player       = @side.players.where(id: [@blue_team.players.pluck(:id)]).first
+      @red_player        = @side.players.where(id: [@red_team.players.pluck(:id)]).first
+
+      @blue_team_points  = @blue_team.winning_turns.where(game: @game).sum(:points)
+      @red_team_points   = @red_team.winning_turns.where(game: @game).sum(:points)
     end
   end
 
   def configure
-    @players = @game.players
-
+    @title = "Choose Sides"
+    @teams = @game.teams
+    @sides = [Side.new(direction: 'east'), Side.new(direction: 'west')]
   end
 
   # GET /games/new
   def new
-    @game = Game.new(points: 11)
+    @game = Game.new(
+      points: 11,
+      teams: [
+        Team.new(color: 'red'),
+        Team.new(color: 'blue')
+      ]
+    )
     @players = Player.all
   end
 
   # GET /games/1/edit
   def edit
+    @players = Player.all
   end
 
   # POST /games
@@ -86,6 +106,17 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
-    params.require(:game).permit(:points, player_ids: [])
+    params.require(:game).permit(
+      :points,
+      player_ids: [],
+      teams_attributes: [
+        :color,
+        player_ids: []
+      ],
+      sides_attributes: [
+        :direction,
+        player_ids: []
+      ]
+    )
   end
 end

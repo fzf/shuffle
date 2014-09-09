@@ -1,11 +1,13 @@
 %ul.table-view
   %li.table-view-cell
-    = @game.winner.name
+    = @game.winner.players.first.name
+    &
+    = @game.winner.players.last.name
     won the game!
   %li.table-view-divider
     Turns
     - @game.turns.each do |turn|
       %li.table-view-cell
-        = turn.winner.name
+        = turn.winner.players.where(id: turn.side.players.pluck(:id) ).first.name
         scored
         = turn.points

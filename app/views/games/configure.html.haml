@@ -6,14 +6,21 @@
         - @game.errors.full_messages.each do |msg|
           %li= msg
   .table-view
-    .table-view-divider
-      Players
-    - @players.each do |player|
-      .table-view-cell
-        = label_tag dom_id(player), player.name
-        .pull-right
-          .icon.icon-plus.js-add-player
-            = check_box_tag "game[team_attributes][]", player.id, @game.player_ids.include?(player.id), id: dom_id(player), hidden: true
-
+    - @game.teams.each do |team|
+      .table-view-divider
+        = "#{team.color.try(:humanize)} Team"
+      - team.players.each do |player|
+        .table-view-cell
+          = label_tag dom_id(player), player.name
+          .pull-right
+            - @sides.each_with_index do |side, index|
+              .btn.btn-primary.btn-outlined.js-add-player
+                = side.direction.humanize
+                = hidden_field_tag "game[sides_attributes][#{index}][direction]",
+                  side.direction
+                = check_box_tag "game[sides_attributes][#{index}][player_ids][]",
+                  player.id,
+                  side.players.include?(player),
+                  hidden: true
   .actions
     = f.submit 'Save', class: "btn btn-positive btn-block"

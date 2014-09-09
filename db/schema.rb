@@ -90,11 +90,13 @@ ActiveRecord::Schema.define(version: 20140905041445) do
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true, using: :btree
 
   create_table "sides", force: true do |t|
+    t.string   "direction"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "teams", force: true do |t|
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140905041445) do
   create_table "turns", force: true do |t|
     t.integer  "points"
     t.integer  "game_id"
+    t.integer  "side_id"
     t.integer  "winner_id"
     t.integer  "loser_id"
     t.datetime "created_at"

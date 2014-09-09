@@ -13,9 +13,25 @@
       Players
     - @players.each do |player|
       .table-view-cell
-        .icon.icon-plus.js-add-player
-          = check_box_tag "game[player_ids][]", player.id, @game.player_ids.include?(player.id), id: dom_id(player), hidden: true
         = label_tag dom_id(player), player.name
+        - @game.teams.each_with_index do |team, index|
+          .pull-right
+            - if team.color == 'red'
+              .btn.btn-negative.btn-outlined.js-add-player
+                = team.color.humanize
+                = hidden_field_tag "game[teams_attributes][#{index}][color]", team.color
+                = check_box_tag "game[teams_attributes][#{index}][player_ids][]",
+                  player.id,
+                  team.players.include?(player),
+                  hidden: true
+            - else
+              .btn.btn-primary.btn-outlined.js-add-player
+                Blue
+                = hidden_field_tag "game[teams_attributes][#{index}][color]", 'blue'
+                = check_box_tag "game[teams_attributes][#{index}][player_ids][]",
+                  player.id,
+                  team.players.include?(player),
+                  hidden: true
 
   .actions
     = f.submit 'Save', class: "btn btn-positive btn-block"

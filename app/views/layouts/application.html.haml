@@ -13,11 +13,12 @@
   %body
     #content
       %header.bar.bar-nav
+        = link_to :games do
+          .icon.icon-list.pull-left
         %h1.title
           = @title
+        - if current_player.present?
+          = link_to current_player do
+            #menu.icon.icon-person.pull-right
       %body.content
-        -# %p.notice
-        -#   = notice
-        -# %p.alert
-        -#   = alert
         = yield

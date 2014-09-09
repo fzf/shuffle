@@ -1,4 +1,6 @@
 class TurnsController < ApplicationController
+  before_action :authenticate_player!
+
   def create
     @turn = Turn.create(turn_params)
     redirect_to :back

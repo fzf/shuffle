@@ -1,12 +1,19 @@
 %ul.table-view
   = link_to 'New', [:new, :game], class: "btn btn-positive btn-block"
+  .table-view-divider
+    Players
+    .pull-right
+      Winner
   - @games.each do |game|
     %li.table-view-cell
       %span.pull-left
         = link_to game do
-          = game.created_at.localtime
+          = game.created_at.localtime.to_s(:short)
       %span.pull-right
         - if game.completed?
-          = game.winner.name
+          = game.winner.players.first.name
+          - if game.winner.players.count > 1
+            &
+            = game.winner.players.last.name
         - else
           Not completed

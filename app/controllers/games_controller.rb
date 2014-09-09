@@ -107,8 +107,10 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def game_params
+    params[:game][:creator_id] = current_player.id
     params.require(:game).permit(
       :points,
+      :creator_id,
       player_ids: [],
       teams_attributes: [
         :color,

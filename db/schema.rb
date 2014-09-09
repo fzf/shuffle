@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140905041445) do
     t.boolean  "completed",  default: false
     t.integer  "winner_id"
     t.integer  "loser_id"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140905041445) do
     t.integer  "side_id"
     t.integer  "winner_id"
     t.integer  "loser_id"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

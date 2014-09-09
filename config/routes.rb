@@ -8,9 +8,8 @@ Rails.application.routes.draw do
     resources :turns, only: [:create]
   end
 
-  resources :players, only: [:index, :show, :edit, :update]
-
   devise_for :players
+  resources :players, only: [:show]
 
   root 'games#index'
 end

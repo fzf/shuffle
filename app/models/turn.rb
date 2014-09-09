@@ -4,6 +4,7 @@ class Turn < ActiveRecord::Base
 
   belongs_to :winner, class_name: 'Team'
   belongs_to :loser, class_name: 'Team'
+  belongs_to :creator, class_name: 'Player'
 
   after_create :check_winner
 

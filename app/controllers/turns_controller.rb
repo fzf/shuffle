@@ -9,6 +9,8 @@ class TurnsController < ApplicationController
 private
 
   def turn_params
-    params.require(:turn).permit(:points, :game_id, :side_id, :winner_id, :loser_id)
+    params[:turn][:creator_id] = current_player.id
+    params.require(:turn)
+      .permit(:points, :game_id, :side_id, :winner_id, :loser_id, :creator_id)
   end
 end

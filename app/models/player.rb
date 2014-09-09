@@ -6,4 +6,7 @@ class Player < ActiveRecord::Base
 
   has_many :game_players
   has_many :games, through: :game_players
+
+  has_many :created_games, class_name: Game, foreign_key: :creator_id
+  has_many :created_turns, class_name: Turn, foreign_key: :creator_id
 end

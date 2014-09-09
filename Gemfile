@@ -9,6 +9,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'ratchet-sass'
 gem 'nested_form'
+gem 'rails_12factor'
 
 gem 'jquery-rails'
 gem 'turbolinks'

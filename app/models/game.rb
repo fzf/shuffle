@@ -23,8 +23,8 @@ class Game < ActiveRecord::Base
 private
   def create_sides
     if players.count == 2
-      sides.create(players: [players.first])
-      sides.create(players: [players.last])
+      sides.create(direction: 'east', players: players)
+      sides.create(direction: 'west', players: players)
     end
   end
 end

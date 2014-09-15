@@ -111,6 +111,7 @@ private
     params.require(:game).permit(
       :points,
       :creator_id,
+      :is_ladder,
       player_ids: [],
       teams_attributes: [
         :color,

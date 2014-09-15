@@ -6,9 +6,14 @@
         - @game.errors.full_messages.each do |msg|
           %li= msg
   .table-view
+    .table-view-divider
+      Setup
     .input-row
       = f.label :points
       = f.text_field :points
+    .input-row
+      = f.label :is_ladder, 'Ladder Game'
+      = f.check_box :is_ladder
     .table-view-divider
       Players
     - @players.each do |player|
